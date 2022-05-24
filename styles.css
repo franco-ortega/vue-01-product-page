@@ -7,3 +7,11 @@
     );
     height: 100px;
 }
+
+.product {
+    display: flex;
+}
+
+.product-image {
+    width: 200px;
+}
