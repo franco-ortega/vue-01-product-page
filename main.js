@@ -13,6 +13,17 @@ const app = new Vue({
         inventory: 100,
         showMe: false,
         onSale: true,
-        details: ["80% cotton", "20% polyester", "Gender-neutral"]
+        details: ["80% cotton", "20% polyester", "Gender-neutral"],
+        variants: [
+            {
+                variantId: 2234,
+                variantColor: "green"
+            },
+            {
+                variantId: 2235,
+                variantColor: "blue"
+            }
+        ],
+        sizes: ["XXS", "XS", "S", "M", "L", "XL", "XXL"]
     }
 });
