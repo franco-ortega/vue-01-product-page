@@ -1,0 +1,9 @@
+.nav-bar {
+    background: linear-gradient(
+        90deg,
+        lightgreen,
+        green,
+        darkgreen
+    );
+    height: 100px;
+}
