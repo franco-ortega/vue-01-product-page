@@ -7,6 +7,7 @@ const app = new Vue({
         product: 'Socks',
         description: 'Warm and fuzzy.',
         image: './assets/vmSocks-green.png',
-        alt: 'a pair of green socks'
+        alt: 'a pair of green socks',
+        sockHref: 'https://www.sockdreams.com/'
     }
 });
