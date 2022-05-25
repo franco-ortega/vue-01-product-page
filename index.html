@@ -45,6 +45,9 @@
                 </div>
 
                 <button v-on:click="addToCart">Add to Cart</button>
+                <button 
+                    v-show="cart > 0"
+                    @click="removeFromCart">Remove One Item from Cart</button>
 
                 <div class="cart">
                     <p>Cart({{ cart }})</p>
