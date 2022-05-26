@@ -10,7 +10,7 @@ const app = new Vue({
         alt: 'a pair of green socks',
         sockHref: 'https://www.sockdreams.com/',
         inStock: true,
-        inventory: 100,
+        inventory: 12,
         showMe: false,
         onSale: true,
         details: ["80% cotton", "20% polyester", "Gender-neutral"],
@@ -38,6 +38,9 @@ const app = new Vue({
         },
         removeFromCart() {
             this.cart -= 1
+        },
+        soldOut() {
+            inStock = false
         }
     }
 });
