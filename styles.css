@@ -1,6 +1,10 @@
-
 img {
     width: 100%;
+}
+
+button {
+    background-color: rgb(13, 121, 158);
+    color: rgb(255, 255, 255);
 }
 
 .nav-bar {
@@ -19,4 +23,18 @@ img {
 
 .product-image {
     width: 200px;
+}
+
+.color-box {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+}
+
+.disabledButton {
+    background-color: #d8d8d8;
+}
+
+.outOfStock {
+    text-decoration: line-through;
 }
