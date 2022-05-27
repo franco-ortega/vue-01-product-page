@@ -1,5 +1,5 @@
 // const product = 'Socks';
-console.log('Hello JS!')
+// console.log('Hello JS!')
 
 // const app = new Vue({
 //     el: '#app',
@@ -69,6 +69,10 @@ Vue.component('product', {
         premium: {
             type: Boolean,
             required: true
+        },
+        cart: {
+            type: Array,
+            required: true
         }
     },
     template: `
@@ -111,13 +115,11 @@ Vue.component('product', {
                 :disabled="!inStock || cart === inventory"
                 :class="{ disabledButton: !inStock }"
                 >Add to Cart</button>
-            <button 
-                v-show="cart > 0"
-                @click="removeFromCart">Remove One Item from Cart</button>
-
-            <div class="cart">
-                <p>Cart({{ cart }})</p>
-            </div>
+            <button
+                @click="removeFromCart"
+                :disabled="emptyCart"
+                :class="{ disabledButton: emptyCart }"
+                >Remove from Cart</button>
         </div>
 
     </div>
@@ -147,23 +149,24 @@ Vue.component('product', {
                     variantId: 2235,
                     variantColor: 'blue',
                     variantImage: './assets/vmSocks-blue.png',
-                    variantQuantity: 0
+                    variantQuantity: 3
                 }
             ],
             sizes: ["XXS", "XS", "S", "M", "L", "XL", "XXL"],
-            cart: 0,
         }
     },
     methods: {
         addToCart() {
-            this.cart += 1
+            // this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
         },
         updateProduct(index) {
             // this.image = variantImage
             this.selectedVariant = index
         },
         removeFromCart() {
-            this.cart -= 1
+            // this.cart -= 1
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId)
         },
         soldOut() {
             inStock = false
@@ -185,6 +188,9 @@ Vue.component('product', {
         shipping() {
             if(this.premium) return 'Free'
             return 2.99
+        },
+        emptyCart() {
+            return !this.cart.includes(this.variants[this.selectedVariant].variantId)
         }
     }
 })
@@ -206,7 +212,20 @@ Vue.component('product-details', {
 const app = new Vue({
     el: '#app',
     data: {
-        premium: true
+        premium: true,
+        cart: []
+    },
+    methods: {
+        updateCart(id) {
+            // this.cart += 1
+            this.cart.push(id)
+        },
+        removeItem(id) {
+            console.log(id, this.cart)
+            this.cart = this.cart.filter(item => item !== id)
+            console.log(id, this.cart)
+            return this.cart
+        }
     }
 });
 
