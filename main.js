@@ -114,12 +114,12 @@ Vue.component('product', {
                 v-on:click="addToCart"
                 :disabled="!inStock || cart === inventory"
                 :class="{ disabledButton: !inStock }"
-                >Add to Cart</button>
+                >Add One to Cart</button>
             <button
                 @click="removeFromCart"
                 :disabled="emptyCart"
                 :class="{ disabledButton: emptyCart }"
-                >Remove from Cart</button>
+                >Remove One from Cart</button>
         </div>
 
     </div>
@@ -221,8 +221,12 @@ const app = new Vue({
             this.cart.push(id)
         },
         removeItem(id) {
-            this.cart = this.cart.filter(item => item !== id)
-            return this.cart
+            for(let i = 0; i < this.cart.length; i++) {
+                if(this.cart[i] === id) {
+                    this.cart.splice(i, 1);
+                    return this.cart;
+                }
+            }
         }
     }
 });
