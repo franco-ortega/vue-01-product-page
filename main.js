@@ -221,9 +221,7 @@ const app = new Vue({
             this.cart.push(id)
         },
         removeItem(id) {
-            console.log(id, this.cart)
             this.cart = this.cart.filter(item => item !== id)
-            console.log(id, this.cart)
             return this.cart
         }
     }
