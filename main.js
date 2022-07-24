@@ -85,6 +85,7 @@ Vue.component('product', {
         <div class="product-info">
             <h1>{{ title }}</h1>
             <h2>{{ description }}</h2>
+            <product-details :details="['80% cotton', '20% polyester', 'Gender-neutral']"></product-details >
             <p v-if="inStock && inventory > 10">In Stock</p>
             <p v-else-if="inStock && inventory > 0 && inventory <= 10">Almost Sold Out</p>
             <p v-else :class="{outOfStock: !inStock}">Out of Stock</p>
@@ -117,6 +118,8 @@ Vue.component('product', {
                     <!-- <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p> -->
                 </div>
             </div>
+            
+
 
             <div>
                 <button
