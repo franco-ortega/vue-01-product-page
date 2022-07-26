@@ -254,7 +254,7 @@ Vue.component('product-review', {
 
   <p v-if="errors.length">
     <b>PLease ccorret the folliwn error(s):</b>
-    <ul>
+    <ul class="error">
       <li v-for="error in errors">{{ error }}</li>
     <ul>
   </p>
