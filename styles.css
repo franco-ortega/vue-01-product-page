@@ -65,6 +65,10 @@ button {
   padding: 1rem 1.5rem;
 }
 
+.error {
+  color: red;
+}
+
 .review-form p {
   display: flex;
   flex-direction: column;

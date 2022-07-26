@@ -142,9 +142,10 @@ Vue.component('product', {
                     <p v-if="!reviews.length">There are no reviews yet.</p>
                     <ul>
                         <li v-for="review in reviews">
-                            <p>{{ review.name }}</p>
-                            <p>{{ review.rating }}</p>
-                            <p>{{ review.review }}</p>
+                            <p>Name: {{ review.name }}</p>
+                            <p>Rating: {{ review.rating }}</p>
+                            <p>Review: {{ review.review }}</p>
+                            <p>Recommendation: {{ review.recommendation }}</p>
                         </li>
                     </ul>
                 </div>
@@ -252,6 +253,13 @@ Vue.component('product-review', {
   template: `
   <form class="review-form" @submit.prevent="onReviewSubmit">
 
+  <p v-if="errors.length">
+    <b>PLease ccorret the folliwn error(s):</b>
+    <ul class="error">
+      <li v-for="error in errors">{{ error }}</li>
+    </ul>
+  </p>
+
   <p>
     <label for="name">Name:</label>
     <input type="text" id=""name v-model="name">
@@ -278,6 +286,31 @@ Vue.component('product-review', {
       <option>1</option>
     </select>
   </p>
+
+  <p>
+    Would you recommend this product?
+    <label for="yes">
+      <input
+        v-model="recommendation"
+        type="radio"
+        id="yes"
+        name="recommendation"
+        value="Yes"
+      />
+      Yes
+    </label>
+    <label for="no">
+      <input
+      v-model="recommendation"
+        type="radio"
+        id="no"
+        name="recommendation"
+        value="No"
+      />
+      No
+    </label>
+  </p>
+
   <p>
     <input type="submit" value="Submit">
   </p>
@@ -288,20 +321,33 @@ Vue.component('product-review', {
       name: null,
       review: null,
       rating: null,
+      recommendation: null,
+      errors: [],
     };
   },
   methods: {
     onReviewSubmit() {
-      let productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating,
-      };
+      if (this.name && this.review && this.rating && this.recommendation) {
+        let productReview = {
+          name: this.name,
+          review: this.review,
+          rating: this.rating,
+          recommendation: this.recommendation,
+        };
 
-      this.$emit('review-submitted', productReview);
-      this.name = null;
-      this.review = null;
-      this.rating = null;
+        console.log(productReview)
+
+        this.$emit('review-submitted', productReview);
+        this.name = null;
+        this.review = null;
+        this.rating = null;
+        this.recommendation = null;
+      } else {
+        if (!this.name) this.errors.push('Name required.');
+        if (!this.review) this.errors.push('Review required.');
+        if (!this.rating) this.errors.push('Rating required.');
+        if (!this.recommendation) this.errors.push('Recommendation required.');
+      }
     },
   },
 });
